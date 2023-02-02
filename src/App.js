@@ -1,7 +1,17 @@
+import { useEffect, useState } from "react";
 import "./App.css";
+import axios from "axios";
 
 function App() {
-  console.log("date");
+  const [FactsData, setFactsData] = useState([]);
+  useEffect(() => {
+    axios
+      .get(`https://63db4515b8e69785e47e7435.mockAPI.io/country`)
+      .then((response) => {
+        setFactsData(response.data);
+      });
+  }, []);
+
   return (
     <div className="App">
       <header className="header">
@@ -19,80 +29,16 @@ function App() {
           </label>
         </div>
       </header>
+
       <main>
         <section className="cards-wrapper">
-          <article className="card">
-            <h2 className="short-fact">
-              The flag of the USA has at least 13 versions.
-            </h2>
-            <p className="long-fact">
-              It started as a British flag variation featuring 13 white stripes
-              for the 13 colonies. Eventually, white stars joined the design
-              representing each state in the union. Hawaii became the 50th state
-              of the USA, making it the 50th star on the flag as well.
-            </p>
-            <p className="country-name">USA</p>
-          </article>
-          <article className="card">
-            <h2 className="short-fact">
-              The flag of the USA has at least 13 versions.
-            </h2>
-            <p className="long-fact">
-              It started as a British flag variation featuring 13 white stripes
-              for the 13 colonies. Eventually, white stars joined the design
-              representing each state in the union. Hawaii became the 50th state
-              of the USA, making it the 50th star on the flag as well.
-            </p>
-            <p className="country-name">USA</p>
-          </article>
-          <article className="card">
-            <h2 className="short-fact">
-              The flag of the USA has at least 13 versions.
-            </h2>
-            <p className="long-fact">
-              It started as a British flag variation featuring 13 white stripes
-              for the 13 colonies. Eventually, white stars joined the design
-              representing each state in the union. Hawaii became the 50th state
-              of the USA, making it the 50th star on the flag as well.
-            </p>
-            <p className="country-name">USA</p>
-          </article>
-          <article className="card">
-            <h2 className="short-fact">
-              The flag of the USA has at least 13 versions.
-            </h2>
-            <p className="long-fact">
-              It started as a British flag variation featuring 13 white stripes
-              for the 13 colonies. Eventually, white stars joined the design
-              representing each state in the union. Hawaii became the 50th state
-              of the USA, making it the 50th star on the flag as well.
-            </p>
-            <p className="country-name">USA</p>
-          </article>
-          <article className="card">
-            <h2 className="short-fact">
-              The flag of the USA has at least 13 versions.
-            </h2>
-            <p className="long-fact">
-              It started as a British flag variation featuring 13 white stripes
-              for the 13 colonies. Eventually, white stars joined the design
-              representing each state in the union. Hawaii became the 50th state
-              of the USA, making it the 50th star on the flag as well.
-            </p>
-            <p className="country-name">USA</p>
-          </article>
-          <article className="card">
-            <h2 className="short-fact">
-              The flag of the USA has at least 13 versions.
-            </h2>
-            <p className="long-fact">
-              It started as a British flag variation featuring 13 white stripes
-              for the 13 colonies. Eventually, white stars joined the design
-              representing each state in the union. Hawaii became the 50th state
-              of the USA, making it the 50th star on the flag as well.
-            </p>
-            <p className="country-name">USA</p>
-          </article>
+          {FactsData.map((data) => (
+            <article className="card" key="index">
+              <h2 className="short-fact">{data.shortFact}</h2>
+              <p className="long-fact">{data.longFact}</p>
+              <p className="country-name">{data.country}</p>
+            </article>
+          ))}
         </section>
       </main>
     </div>

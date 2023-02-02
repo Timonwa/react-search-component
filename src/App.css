@@ -15,6 +15,7 @@ body {
 /* header */
 .header {
   padding: 20px 0;
+  text-align: center;
 }
 .page-title {
   margin: 0 0 20px;
@@ -23,12 +24,16 @@ body {
   display: flex;
   width: 100%;
   max-width: 400px;
+  margin: auto;
 }
 .search-input {
   flex-grow: 1;
   padding: 5px 10px;
   border-radius: 5px 0 0 5px;
   border: 1px solid #ddd;
+}
+.search-input:focus {
+  outline: #434341;
 }
 .search-input-label {
   padding: 5px 10px;
