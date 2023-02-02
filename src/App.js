@@ -3,6 +3,7 @@ import "./App.css";
 import axios from "axios";
 
 function App() {
+  const [isloading, setIsloading] = useState(true);
   const [FactsData, setFactsData] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   const [filteredResults, setFilteredResults] = useState([]);
@@ -12,6 +13,7 @@ function App() {
       .get(`https://63db4515b8e69785e47e7435.mockAPI.io/country`)
       .then((response) => {
         setFactsData(response.data);
+        setIsloading(false);
       });
   }, []);
 
@@ -44,27 +46,30 @@ function App() {
             Search
           </label>
         </div>
-        <p>{searchInput}</p>
       </header>
 
       <main>
-        <section className="cards-wrapper">
-          {filteredResults.length === 0
-            ? FactsData.map((data) => (
-                <article className="card" key="index">
-                  <h2 className="short-fact">{data.shortFact}</h2>
-                  <p className="long-fact">{data.longFact}</p>
-                  <p className="country-name">{data.country}</p>
-                </article>
-              ))
-            : filteredResults.map((data) => (
-                <article className="card" key="index">
-                  <h2 className="short-fact">{data.shortFact}</h2>
-                  <p className="long-fact">{data.longFact}</p>
-                  <p className="country-name">{data.country}</p>
-                </article>
-              ))}
-        </section>
+        {isloading ? (
+          <p className="message">loading...</p>
+        ) : (
+          <section className="cards-wrapper">
+            {filteredResults.length === 0
+              ? FactsData.map((data) => (
+                  <article className="card" key="index">
+                    <h2 className="short-fact">{data.shortFact}</h2>
+                    <p className="long-fact">{data.longFact}</p>
+                    <p className="country-name">{data.country}</p>
+                  </article>
+                ))
+              : filteredResults.map((data) => (
+                  <article className="card" key="index">
+                    <h2 className="short-fact">{data.shortFact}</h2>
+                    <p className="long-fact">{data.longFact}</p>
+                    <p className="country-name">{data.country}</p>
+                  </article>
+                ))}
+          </section>
+        )}
       </main>
     </div>
   );
