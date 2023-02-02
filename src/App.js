@@ -4,6 +4,9 @@ import axios from "axios";
 
 function App() {
   const [FactsData, setFactsData] = useState([]);
+  const [searchInput, setSearchInput] = useState("");
+  const [filteredResults, setFilteredResults] = useState([]);
+
   useEffect(() => {
     axios
       .get(`https://63db4515b8e69785e47e7435.mockAPI.io/country`)
@@ -11,6 +14,17 @@ function App() {
         setFactsData(response.data);
       });
   }, []);
+
+  const searchItems = (searchValue) => {
+    setSearchInput(searchValue);
+    const filteredData = FactsData.filter((item) => {
+      return Object.values(item)
+        .join("")
+        .toLowerCase()
+        .includes(searchInput.toLowerCase());
+    });
+    setFilteredResults(filteredData);
+  };
 
   return (
     <div className="App">
@@ -23,22 +37,33 @@ function App() {
             type="search"
             name="search"
             id="search"
+            placeholder="Search..."
+            onChange={(e) => searchItems(e.target.value)}
           />
           <label className="search-input-label" htmlFor="search">
             Search
           </label>
         </div>
+        <p>{searchInput}</p>
       </header>
 
       <main>
         <section className="cards-wrapper">
-          {FactsData.map((data) => (
-            <article className="card" key="index">
-              <h2 className="short-fact">{data.shortFact}</h2>
-              <p className="long-fact">{data.longFact}</p>
-              <p className="country-name">{data.country}</p>
-            </article>
-          ))}
+          {filteredResults.length === 0
+            ? FactsData.map((data) => (
+                <article className="card" key="index">
+                  <h2 className="short-fact">{data.shortFact}</h2>
+                  <p className="long-fact">{data.longFact}</p>
+                  <p className="country-name">{data.country}</p>
+                </article>
+              ))
+            : filteredResults.map((data) => (
+                <article className="card" key="index">
+                  <h2 className="short-fact">{data.shortFact}</h2>
+                  <p className="long-fact">{data.longFact}</p>
+                  <p className="country-name">{data.country}</p>
+                </article>
+              ))}
         </section>
       </main>
     </div>
