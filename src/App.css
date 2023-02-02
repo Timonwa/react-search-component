@@ -27,14 +27,14 @@ body {
   margin: auto;
 }
 .search-input-label {
-  border-radius: 5px 0 0 5px;
+  border-radius: 5px;
   flex-grow: 1;
 }
 .search-input {
   width: 100%;
   border: 1px solid #ddd;
   padding: 5px 10px;
-  border-radius: 5px 0 0 5px;
+  border-radius: 5px;
 }
 .search-input:focus {
   outline: #434341;
@@ -46,14 +46,6 @@ body {
   background-color: #eee;
 }
 
-/* loading and no result message */
-.message {
-  color: rgb(83, 83, 83);
-  text-align: center;
-}
-.search-text {
-  color: rgb(46, 46, 206);
-}
 /* cards */
 .cards-wrapper {
   display: grid;

@@ -14,11 +14,13 @@ function App() {
       .then((response) => {
         setFactsData(response.data);
         setIsloading(false);
+      })
+      .catch((err) => {
+        console.log(err);
       });
   }, []);
 
-  const searchItems = (searchValue) => {
-    setSearchInput(searchValue);
+  useEffect(() => {
     const filteredData = FactsData.filter((item) => {
       return Object.values(item)
         .join("")
@@ -26,14 +28,14 @@ function App() {
         .includes(searchInput.toLowerCase());
     });
     setFilteredResults(filteredData);
-  };
+  }, [FactsData, searchInput]);
 
   return (
     <div className="App">
       <header className="header">
         <h1 className="page-title">Random Country Facts</h1>
 
-        <form className="form-input-group">
+        <div className="form-input-group">
           <label className="search-input-label" htmlFor="search">
             <input
               className="search-input"
@@ -43,16 +45,12 @@ function App() {
               placeholder="Search..."
               value={searchInput}
               onChange={(e) => {
-                searchItems(e.target.value);
-                console.log(e.target.value);
+                setSearchInput(e.target.value);
               }}
               required
             />
           </label>
-          <button className="search-button" type="submit">
-            Search
-          </button>
-        </form>
+        </div>
       </header>
 
       <main>
