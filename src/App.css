@@ -26,16 +26,20 @@ body {
   max-width: 400px;
   margin: auto;
 }
-.search-input {
+.search-input-label {
+  border-radius: 5px 0 0 5px;
   flex-grow: 1;
+}
+.search-input {
+  width: 100%;
+  border: 1px solid #ddd;
   padding: 5px 10px;
   border-radius: 5px 0 0 5px;
-  border: 1px solid #ddd;
 }
 .search-input:focus {
   outline: #434341;
 }
-.search-input-label {
+.search-button {
   padding: 5px 10px;
   border-radius: 0 5px 5px 0;
   border: 1px solid #ddd;
@@ -45,11 +49,11 @@ body {
 /* loading and no result message */
 .message {
   color: rgb(83, 83, 83);
+  text-align: center;
 }
 .search-text {
   color: rgb(46, 46, 206);
 }
-
 /* cards */
 .cards-wrapper {
   display: grid;

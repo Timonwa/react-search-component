@@ -33,20 +33,26 @@ function App() {
       <header className="header">
         <h1 className="page-title">Random Country Facts</h1>
 
-        <div className="form-input-group">
-          <input
-            className="search-input"
-            type="search"
-            name="search"
-            id="search"
-            placeholder="Search..."
-            value={searchInput}
-            onChange={(e) => searchItems(e.target.value)}
-          />
+        <form className="form-input-group">
           <label className="search-input-label" htmlFor="search">
-            Search
+            <input
+              className="search-input"
+              type="search"
+              name="search"
+              id="search"
+              placeholder="Search..."
+              value={searchInput}
+              onChange={(e) => {
+                searchItems(e.target.value);
+                console.log(e.target.value);
+              }}
+              required
+            />
           </label>
-        </div>
+          <button className="search-button" type="submit">
+            Search
+          </button>
+        </form>
       </header>
 
       <main>
