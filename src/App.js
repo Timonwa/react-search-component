@@ -40,6 +40,7 @@ function App() {
             name="search"
             id="search"
             placeholder="Search..."
+            value={searchInput}
             onChange={(e) => searchItems(e.target.value)}
           />
           <label className="search-input-label" htmlFor="search">
